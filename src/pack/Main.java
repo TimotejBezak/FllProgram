@@ -56,11 +56,11 @@ public class Main {
 	}
 
 	public static void Select(int dir) {
-		 if (selected.poradie + dir < vyjazdy.length && selected.poradie + dir >= 0) {
+		if (selected.poradie + dir < vyjazdy.length && selected.poradie + dir >= 0) {
 	            selected.selected = false;
 	            selected = vyjazdy[selected.poradie + dir];
 	            selected.selected = true;
-	        }
+        }
 	}
 
 	private static void KresliMenu() {
