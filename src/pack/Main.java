@@ -1,24 +1,27 @@
 package pack;
 
+import Vyjazdy.DruhyVyjazd;
+import Vyjazdy.PrvyVyjazd;
+import Vyjazdy.piatyVyjazd;
+import Vyjazdy.stvrtyVyjazd;
+import Vyjazdy.tretiVyjazd;
 import lejos.hardware.Brick;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.LCD;
-import lejos.hardware.motor.EV3LargeRegulatedMotor;
-import lejos.hardware.motor.Motor;
-import lejos.hardware.port.MotorPort;
-import lejos.robotics.RegulatedMotor;
-import lejos.utility.Delay;
 import lejos.utility.Stopwatch;
 
 public class Main {
 
 	static Vyjazd[] vyjazdy;
     static Vyjazd selected;
-    static boolean beziVyjazd;
-	
+    static SpustacVyjazdov spustac;
+	static boolean beziVyjazd = false;
+    
 	public static void main(String[] args) {
 		Stopwatch sw = new Stopwatch();
-        vyjazdy = new Vyjazd[]{new PrvyVyjazd(), new PrvyVyjazd(), new PrvyVyjazd()};
+        vyjazdy = new Vyjazd[]{new PrvyVyjazd(), new DruhyVyjazd(), new tretiVyjazd(), new stvrtyVyjazd(), new piatyVyjazd()};
+        spustac = new SpustacVyjazdov();
+//        vyjazdThread = new Thread(spustac);
         Vyjazd.init();
         KresliMenu();
         Brick brick = LocalEV3.get();
@@ -38,6 +41,7 @@ public class Main {
                     KresliMenu();
                 } else if (stlacene[1] && !predosleStlacene[1]) {
                     SpustiVyjazd();
+//                    System.out.println("Spustam vyjazd: "+ selected.poradie);
                     if(selected.poradie == 0) sw.reset();
                 } else if (stlacene[2] && !predosleStlacene[2]) {
                     Select(1);
@@ -46,11 +50,12 @@ public class Main {
                     break;
                 }
             }
-            else if(selected.thread.isAlive()){
+            else {
                if(stlacene[5] && !predosleStlacene[5]){
-//                    ZastavVyjazd();
+                    ZastavVyjazd();
                 }
             }
+            
             predosleStlacene = stlacene;
         }
 	}
@@ -64,14 +69,11 @@ public class Main {
 	}
 
 	private static void KresliMenu() {
-		// TODO Auto-generated method stub
 		LCD.clear();
         for (int i = 0; i < vyjazdy.length; i++){
             vyjazdy[i].poradie = i;
             vyjazdy[i].KresliMenu();
         }
-//        int millis = sw.elapsed();
-//        LCD.drawString((millis /60000) + ":" + (millis/1000),5,5);
         if(beziVyjazd){
             LCD.drawString("Bezi vyjazd " + selected.meno, 0, 6);
         }
@@ -79,17 +81,15 @@ public class Main {
 	}
 
 	public static void SpustiVyjazd() {
-		selected.thread = new Thread(selected, selected.meno);
-        selected.thread.start();
-        beziVyjazd = true;
-        KresliMenu();
-		
+		beziVyjazd = true;
+		spustac.spustiVyjazd(selected);
+        KresliMenu();	
 	}
 
 	public static void ZastavVyjazd() {
 		beziVyjazd = false;
-        selected.thread.interrupt();
-        selected.Stop();
-        KresliMenu();
+		spustac.zastav();
+		KresliMenu();
 	}
 }
+

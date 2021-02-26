@@ -1,14 +1,14 @@
 package pack;
 
+import Robot.Robot;
 import lejos.hardware.lcd.LCD;
 import lejos.utility.Stopwatch;
 
-public abstract class Vyjazd implements Runnable {
+public abstract class Vyjazd{
 
-	public Thread thread;
 	public String meno;
 	public int poradie;
-	protected static Robot robot;
+	protected static volatile Robot robot;
 	protected Stopwatch sw;
 	public boolean selected;
 	
@@ -21,11 +21,10 @@ public abstract class Vyjazd implements Runnable {
 		robot = new Robot();
 	}
 	
-	@Override
-	public void run() {
+	public void Zacni() {
+		System.out.println("Spustam vyjazd " + meno + poradie + Thread.currentThread().isDaemon());
 		// TODO Auto-generated method stub
-//		System.out.println("Spustam vyjazd " + meno + poradie);
-		Spusti();
+        Spusti();
         Main.ZastavVyjazd();
         Main.Select(1);
 	}

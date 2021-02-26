@@ -1,0 +1,82 @@
+package Robot;
+
+import lejos.hardware.motor.EV3LargeRegulatedMotor;
+import lejos.hardware.port.Port;
+import lejos.robotics.RegulatedMotor;
+
+public class Chassis {
+	public EV3LargeRegulatedMotor left;
+	public EV3LargeRegulatedMotor right;
+	
+	public Chassis(Port left, Port right) {
+		this.left = new EV3LargeRegulatedMotor(left);
+		this.right = new EV3LargeRegulatedMotor(right);
+		this.left.synchronizeWith(new RegulatedMotor[] {this.right});
+	}
+	
+	public boolean isMoving() {
+		return left.isMoving() || right.isMoving();
+	}
+	
+	public void initSynchronizedMovement(float speed, int acc) {
+		left.startSynchronization();
+		left.setAcceleration(acc);
+		right.setAcceleration(acc);
+		left.endSynchronization();
+		
+		left.startSynchronization();
+		left.setSpeed(speed);
+		right.setSpeed(speed);
+		left.endSynchronization();
+	}
+	
+	public void beginForwardMovement() {
+		left.startSynchronization();
+		left.forward();
+		right.forward();
+		left.endSynchronization();
+	}
+	
+	public void beginForwardMovement(int angle) {
+		angle *= -1;
+		left.startSynchronization();
+		left.rotate(angle, true);
+		right.rotate(angle, true);
+		left.startSynchronization();
+	}
+	
+	public void beginBackwardMovement() {
+		left.startSynchronization();
+		left.backward();
+		right.backward();
+		left.endSynchronization();
+	}
+	
+	public void beginBackwardMovement(int angle) {
+		beginForwardMovement(-angle);
+	}
+	
+	public void stopMovement() {
+		left.startSynchronization();
+		left.setSpeed(0);
+		right.setSpeed(0);
+		left.endSynchronization();
+		
+		left.startSynchronization();
+		left.setAcceleration(100000);
+		right.setAcceleration(100000);
+		left.endSynchronization();
+		
+		left.startSynchronization();
+		left.stop();
+		right.stop();
+		left.endSynchronization();
+	}
+	
+	public void adjustSpeed(float leftSpeed, float rightSpeed) {
+		left.startSynchronization();
+		left.setSpeed(leftSpeed);
+		right.setSpeed(rightSpeed);
+		left.endSynchronization();
+	}
+}
