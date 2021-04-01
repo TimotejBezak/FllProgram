@@ -11,12 +11,22 @@ public class VyjazdThread extends Thread {
 	
 	@Override
 	public void run() {
-		active = true;
-		vyjazd.Spusti();
-		active = false;
+		try {
+			active = true;
+			vyjazd.Zacni();
+			active = false;
+		}
+		catch(InterruptedException e) {
+			System.out.println("Vyjazd bol zruseny");
+		}
+		finally {
+			deactivate();
+			vyjazd.Stop();
+		}
 	}
 	
 	public void deactivate() {
+		System.out.print("\n\n\n\n\n\n\n\n");
 		active = false;
 	}
 	

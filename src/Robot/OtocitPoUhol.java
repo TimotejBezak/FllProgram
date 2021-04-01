@@ -40,25 +40,24 @@ public class OtocitPoUhol extends ControlledMovement {
 		if(rychlost2 > 0)chassis.right.backward();
 		else chassis.right.forward();
 		chassis.left.endSynchronization();
-
 	}
 
 	@Override
 	protected float getLeftSpeed(float hodnota) {
 		// TODO Auto-generated method stub
-		float percenta = Math.abs(hodnota-this.zaciatocnyUhol)/this.rozdielUhlov;
+		float percenta = Math.abs((hodnota-this.zaciatocnyUhol)/rozdielUhlov);
 		return rychlostpodlauhlu(percenta)*rychlost1;
 	}
 
 	@Override
 	protected float getRightSpeed(float hodnota) {
 		// TODO Auto-generated method stub
-		float percenta = Math.abs(hodnota-this.zaciatocnyUhol)/this.rozdielUhlov;
+		float percenta = Math.abs((hodnota-this.zaciatocnyUhol)/rozdielUhlov);
 		return rychlostpodlauhlu(percenta)*rychlost2;
 	}
 	
 	protected boolean isActive(float hodnota) {
-		if(rozdielUhlov > 0) {
+		if(this.chcenyuhol > this.zaciatocnyUhol) {
 			if(hodnota >= chcenyuhol) return false;
 		} else {
 			if(hodnota <= chcenyuhol) return false;
@@ -66,5 +65,8 @@ public class OtocitPoUhol extends ControlledMovement {
 		return true;
 	}
 	
+	public void koniec() {
+		int nic = 0;
+	}
 
 }

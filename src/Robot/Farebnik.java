@@ -10,6 +10,7 @@ public class Farebnik implements Sensor {
 	
 	public Farebnik(Port port) {
 		sensor = new EV3ColorSensor(port);
+		sensor.setCurrentMode(1);
 	}
 	
 	@Override
@@ -28,4 +29,7 @@ public class Farebnik implements Sensor {
 		
 	}
 
+	public void nastavMod(int i) {
+		
+	}
 }

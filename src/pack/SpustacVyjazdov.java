@@ -24,6 +24,7 @@ public class SpustacVyjazdov {
     }
     
     public boolean BeziVyjazd() {
+    	if(thread == null) return false;
     	return thread.isActive();
     }
 }

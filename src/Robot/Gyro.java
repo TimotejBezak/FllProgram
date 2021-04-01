@@ -6,9 +6,17 @@ import lejos.hardware.sensor.EV3GyroSensor;
 public class Gyro implements Sensor {
 	private EV3GyroSensor gyro;
 	private float uholPredResetom;
+	private int mod;
 	
 	public void reset() {
+		nastavMod(0);
 		uholPredResetom = getValue();
+		System.out.println("Resetujem gyro, uhol je: "+ uholPredResetom);
+		gyro.reset();
+	}
+	
+	public void hardReset() {
+		uholPredResetom = 0;
 		gyro.reset();
 	}
 	
@@ -18,13 +26,22 @@ public class Gyro implements Sensor {
 		gyro.setCurrentMode(2);
 	}
 	
+	public void nastavMod(int mod) {
+		this.mod = mod;
+	}
+	
 	public float getValue() {
 		float[] sample = new float[gyro.sampleSize()];
 		gyro.fetchSample(sample, 0);
-		return sample[0] + uholPredResetom;
+		float vysledok;
+		if(mod == 0) vysledok = sample[mod] + uholPredResetom;
+		else vysledok = sample[mod];
+		if(vysledok != Double.NaN && vysledok != Double.POSITIVE_INFINITY && vysledok != Double.NEGATIVE_INFINITY) return vysledok;
+		return 0;
 	}
 	
 	public float getError(float hodnota) {
-		return hodnota - uholPredResetom;
+		return hodnota;//-uholPredresetom
 	}
+
 }
