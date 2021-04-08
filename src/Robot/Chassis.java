@@ -41,14 +41,18 @@ public class Chassis {
 		return left.isMoving() || right.isMoving();
 	}
 	
-	public void initSynchronizedMovement(float speed, int acc) {
+	public void initSynchronizedMovement(float speed,int acc) {
+		initSynchronizedMovement(speed,speed,acc);
+	}
+	
+	public void initSynchronizedMovement(float speed1, float speed2, int acc) {
 		left.startSynchronization();
 		left.setAcceleration(acc);
 		right.setAcceleration(acc);
 		left.endSynchronization();
 		left.startSynchronization();
-		left.setSpeed(speed);
-		right.setSpeed(speed);
+		left.setSpeed(speed1);
+		right.setSpeed(speed2);
 		left.endSynchronization();
 	}
 	
@@ -96,6 +100,13 @@ public class Chassis {
 		left.startSynchronization();
 		left.stop();
 		right.stop();
+		left.endSynchronization();
+	}
+	
+	public void nastavitZrychlenie(int acc) {
+		left.startSynchronization();
+		left.setAcceleration(acc);
+		right.setAcceleration(acc);
 		left.endSynchronization();
 	}
 	

@@ -9,9 +9,11 @@ public class Gyro implements Sensor {
 	private int mod;
 	
 	public void reset() {
+		int predoslyMod = this.mod;
 		nastavMod(0);
 		uholPredResetom = getValue();
-		System.out.println("Resetujem gyro, uhol je: "+ uholPredResetom);
+		nastavMod(predoslyMod);
+//		System.out.println("Resetujem gyro, uhol je: "+ uholPredResetom);
 		gyro.reset();
 	}
 	
@@ -28,6 +30,7 @@ public class Gyro implements Sensor {
 	
 	public void nastavMod(int mod) {
 		this.mod = mod;
+		System.out.println("Nastavujem mod na: "+ mod);
 	}
 	
 	public float getValue() {

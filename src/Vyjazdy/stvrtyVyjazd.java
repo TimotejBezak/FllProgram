@@ -20,11 +20,11 @@ public class stvrtyVyjazd extends Vyjazd {
 	protected void Spusti() throws InterruptedException {
 		// TODO Auto-generated method stub
 		
-		robot.dopredu(2.00);
+		//robot.dopredu(2.00);
 		
-		/*robot.dopredu(0.49);
-		robot.dopredu(-0.29);
-		*/
+		robot.dopredu(0.465,700);
+		robot.dopredu(-0.25,700);//0.29
+		
 		
 		
 		//robot.PIDdopredu2(1.9, 800);

@@ -61,8 +61,8 @@ public class Robot {
 	}
 	
 	final float sensitivity = 1.0f;
-	final int zrychlenie = 520;//300;
-	final int default_spomalenie = 500;
+	final int zrychlenie = 700;//500;
+	final int default_spomalenie = 500;//450
 	final float maxSpeed;
 	
 	public void dopredu(double vzd) throws InterruptedException {
@@ -86,16 +86,23 @@ public class Robot {
 	}
 	
 	public void dopredubezgyra(double vzd, float rychlost) {
-		chassis.initSynchronizedMovement(rychlost, zrychlenie);
+		dopredubezgyra(vzd,rychlost,1);
+	}
+	
+	public void dopredubezgyra(double vzd, float rychlost,float zabacanie) {
+		float rozdiel = rychlost*zabacanie-rychlost;
+		chassis.initSynchronizedMovement(rychlost+rozdiel,rychlost-rozdiel, zrychlenie);
 		chassis.beginForwardMovement(chassis.lengthToAngle(vzd));
-		chassis.adjustSpeed(rychlost, rychlost);
+		chassis.adjustSpeed(rychlost+rozdiel, rychlost-rozdiel);
 		while(chassis.isMoving()) {}
 		Stop();
 	}
 
 	public void lineFollowerPravy(float speed, double vzd, int zrychlenie, int spomalenie) throws InterruptedException {
-		PIDController lavy = new PIDController(0.2, 0, 0.3);//0.2,0,0.1  -0.2/6,0,-0.1/6		200,10            pre rychlost 100 optimalne 0.75,0,0 a -0.125,0,0
-		PIDController pravy = new PIDController(-0.2/6, 0, -0.3/6);//140,0,-10
+		//PIDController lavy = new PIDController(0.2, 0, 0.3);//0.2,0,0.1  -0.2/6,0,-0.1/6		200,10            pre rychlost 100 optimalne 0.75,0,0 a -0.125,0,0
+		//PIDController pravy = new PIDController(-0.2/6, 0, -0.3/6);//140,0,-10
+		PIDController lavy = new PIDController(100, 0, 100.0);//0.2,0,0.1  -0.2/6,0,-0.1/6		200,10            pre rychlost 100 optimalne 0.75,0,0 a -0.125,0,0
+		PIDController pravy = new PIDController(-100/8, 0, -100.0/8);
 		PIDControlledMovement pid = new PIDControlledMovement(chassis, pravyFarebnik, pravy, lavy, speed);
 		pid.execute(zrychlenie, chassis.lengthToAngle(vzd),spomalenie);
 	}

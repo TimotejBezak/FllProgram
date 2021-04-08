@@ -25,7 +25,13 @@ public class tretiVyjazd extends Vyjazd {
 		//	System.out.println("farba je "+robot.getLavyFarba());
 		//}
 		
-		robot.dopredu(2,600,520);
+		//robot.dopredu(1.80,600);
+		
+		robot.dopredubezgyra(-0.50, 200, 0.82f);
+		
+		//robot.lineFollowerPravy(100, 2.00, 200, 200);
+		
+		
 		
 		//robot.otocitPoUhol(400, 800, 90);
 		

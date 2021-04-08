@@ -4,7 +4,6 @@ public class PIDControlledMovement extends ControlledMovement {
 
 	protected PIDController leftController;
 	protected PIDController rightController;
-	private float predoslaRychlost=0;
 	
 	public PIDControlledMovement(Chassis _chassis, Sensor sensor, PIDController _right, PIDController _left, float wantedSpeed) {
 		super(_chassis, wantedSpeed, sensor);
@@ -29,51 +28,46 @@ public class PIDControlledMovement extends ControlledMovement {
 			float senzitivita;
 			if(speed < 160 && predoslaRychlost < speed) senzitivita = 1000;
 			else senzitivita = 250;*/
-	
-	
+
+	private float PIDmaxVal=50;
 	@Override
 	protected float getLeftSpeed(float hodnota) {
-		float vysledokzpidu = (float)leftController.getOutput(sensor.getError(hodnota));;
-		
+		float vysledokzpidu = (float)leftController.getOutput(sensor.getError(hodnota));
+		if(vysledokzpidu > PIDmaxVal) vysledokzpidu = PIDmaxVal;
+		else if (vysledokzpidu < -PIDmaxVal) vysledokzpidu = -PIDmaxVal;
 		if(sensor instanceof Farebnik) {			
-			float senzitivita = 250;
-			float rychlost = speed + vysledokzpidu*senzitivita;//zistiRychlostRobota()
-			float druhaRychlost = speed + (float)rightController.getOutput(sensor.getError(hodnota))*senzitivita;//zistiRychlostRobota()
-			if(druhaRychlost > 800) {
-				rychlost -= druhaRychlost-800;
-			}
-			//System.out.println(rychlost+"l");
-			System.out.println("lavy "+speed+"  zmenilo sa o "+vysledokzpidu*senzitivita);
-			predoslaRychlost = speed;
-			if(rychlost < 0)return 1000;
+			float rychlost = speed + vysledokzpidu;
+//			float druhaRychlost = speed + (float)rightController.getOutput(sensor.getError(hodnota));//zistiRychlostRobota()
+//			if(druhaRychlost > 800) {
+//				rychlost -= druhaRychlost-800;
+//			}	
+			
 			return rychlost;
 		}
 		
-		System.out.println("lavy "+speed+"  zmenilo sa o "+vysledokzpidu*zistiRychlostRobota());
-		if(vysledokzpidu<0)return speed + vysledokzpidu*10;
+		//System.out.println("lavy "+speed+"  zmenilo sa o "+vysledokzpidu*zistiRychlostRobota());
+		if(vysledokzpidu<0)return speed + vysledokzpidu;
 		else return speed;
 	}
 
 	@Override
 	protected float getRightSpeed(float hodnota) {
 		float vysledokzpidu = (float)rightController.getOutput(sensor.getError(hodnota));;
-		
+		if(vysledokzpidu > PIDmaxVal) vysledokzpidu = PIDmaxVal;
+		else if (vysledokzpidu < -PIDmaxVal) vysledokzpidu = -PIDmaxVal;
 		if(sensor instanceof Farebnik) {
-			float senzitivita = 250;
-			float rychlost = speed + vysledokzpidu*senzitivita;
-			float druhaRychlost = speed + (float)leftController.getOutput(sensor.getError(hodnota))*senzitivita;
-			if(druhaRychlost > 800) {
-				rychlost -= druhaRychlost-800;
-			}
-			//System.out.println(rychlost+"rr");
-			System.out.println("pravy "+speed+"  zmenilo sa o "+vysledokzpidu*senzitivita);
-			predoslaRychlost = speed;
-			if(rychlost < 0)return 1000;
+			//float senzitivita = 250;
+			float rychlost = speed + vysledokzpidu;
+//			float druhaRychlost = speed + (float)leftController.getOutput(sensor.getError(hodnota));
+//			if(druhaRychlost > 800) {
+//				rychlost -= druhaRychlost-800;
+//			}
+			
 			return rychlost;
 		}
 		
-		System.out.println("pravy "+speed+"  zmenilo sa o "+vysledokzpidu*zistiRychlostRobota()+"rychlost robota je "+zistiRychlostRobota());
-		if(vysledokzpidu<0)return speed + vysledokzpidu*10;
+		//System.out.println("pravy "+speed+"  zmenilo sa o "+vysledokzpidu*zistiRychlostRobota()+"rychlost robota je "+zistiRychlostRobota());
+		if(vysledokzpidu<0)return speed + vysledokzpidu;
 		else return speed;
 		
 	}
