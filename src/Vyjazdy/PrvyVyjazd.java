@@ -14,6 +14,8 @@ public class PrvyVyjazd extends Vyjazd {
 				float PD = 1.2f;//0.044f;0.023 a i=1.5      i=5, PD = 0.39            PD 10 bez i
 				put("dopreduLavy", new PIDController((0.2/400)*PD,(200/400)*nieco,(250/400)*PD));// (0.2/400)*PD,(100/400)*nieco,(250/400)*PD)                6.8  110  500               //1,0.6,2.5         // 3.2,2 //1.2,0.7,2.0     //0.75,0.6,0.4 - toto
 				put("dopreduPravy", new PIDController((-0.2/400)*PD,(-200/400)*nieco,(-250/400)*PD));//-1,-0.6,-2.5// d samostatne 1.4 //0.1,0,0.65
+				put("dozaduLavy", new PIDController((200/400)*PD,(200/400)*nieco,(250/400)*PD));// (0.2/400)*PD,(100/400)*nieco,(250/400)*PD)                6.8  110  500               //1,0.6,2.5         // 3.2,2 //1.2,0.7,2.0     //0.75,0.6,0.4 - toto
+				put("dozaduPravy", new PIDController((-200/400)*PD,(-200/400)*nieco,(-250/400)*PD));
 			}
 		});
 	}
@@ -37,8 +39,8 @@ public class PrvyVyjazd extends Vyjazd {
 		robot.OtocZadny(200);//vyklapanie kociek
 		robot.OtocZadny(-220);//odklapanie kociek
 		
-		robot.otocitPoUhol(-600, -40, 32);//presun k panakom
-		robot.otocitPoUhol(-50, -600, -23);//presun k panakom
+		robot.otocitPoUhol(-500, -30, 32);//presun k panakom
+		robot.otocitPoUhol(-40, -500, -23);//presun k panakom
 		
 		robot.dopredubezgyra(-0.40, 100,0.7f);//zhadzovanie panakov    -0.25
 		robot.dopredubezgyra(-0.50, 600);//navrat do basu

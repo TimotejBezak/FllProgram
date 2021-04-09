@@ -18,12 +18,16 @@ public class Robot {
 	
 	private PIDController PIDdopreduLavy = new PIDController(3.2, 2, 0);//5.4;
 	private PIDController PIDdopreduPravy = new PIDController(-3.2, -2, 0);//5.4;
+	private PIDController PIDdozaduLavy = new PIDController(3.2, 2, 0);//5.4;
+	private PIDController PIDdozaduPravy = new PIDController(-3.2, -2, 0);//5.4;
 	private PIDController PIDdopreduPomer = new PIDController(0.019,-0.0095,0);//0.0165,-0.0095,0.02
 	
 	public void NastavPIDy(Map<String, PIDController> pidy) {
 		this.pidy = pidy;
 		if(pidy.containsKey("dopreduLavy")) PIDdopreduLavy = pidy.get("dopreduLavy");
 		if(pidy.containsKey("dopreduPravy")) PIDdopreduPravy = pidy.get("dopreduPravy");
+		if(pidy.containsKey("dozaduLavy")) PIDdozaduLavy = pidy.get("dozaduLavy");
+		if(pidy.containsKey("dozaduPravy")) PIDdozaduPravy = pidy.get("dozaduPravy");
 		if(pidy.containsKey("dopreduPomer")) PIDdopreduPomer = pidy.get("dopreduPomer");
 	}
 	
@@ -94,7 +98,7 @@ public class Robot {
 		chassis.initSynchronizedMovement(rychlost+rozdiel,rychlost-rozdiel, zrychlenie);
 		chassis.beginForwardMovement(chassis.lengthToAngle(vzd));
 		chassis.adjustSpeed(rychlost+rozdiel, rychlost-rozdiel);
-		while(chassis.isMoving()) {}
+		while(chassis.isMovingbezgyra()) {}
 		Stop();
 	}
 
@@ -126,7 +130,16 @@ public class Robot {
 		gyroSensor.nastavMod(1);
 		//PIDdopreduLavy = new PIDController(3.2,2,0);
 		//PIDdopreduPravy = new PIDController(-3.2,-2,0);
-		PIDControlledMovement pid = new PIDControlledMovement(chassis, gyroSensor, PIDdopreduPravy, PIDdopreduLavy, speed);
+		PIDController lavypid,pravypid;
+		if(vzd > 0) {
+			lavypid = PIDdopreduLavy;
+			pravypid = PIDdopreduPravy;
+		}else {
+			lavypid = PIDdozaduLavy;
+			pravypid = PIDdozaduPravy;
+		}
+		PIDControlledMovement pid = new PIDControlledMovement(chassis, gyroSensor, pravypid, lavypid, speed);
+		
 		pid.execute(zrychlenie, chassis.lengthToAngle(vzd),spomalenie);
 	}
 	

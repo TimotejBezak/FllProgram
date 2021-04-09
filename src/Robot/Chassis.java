@@ -41,6 +41,10 @@ public class Chassis {
 		return left.isMoving() || right.isMoving();
 	}
 	
+	public boolean isMovingbezgyra() {
+		return left.isMoving() && right.isMoving();
+	}
+	
 	public void initSynchronizedMovement(float speed,int acc) {
 		initSynchronizedMovement(speed,speed,acc);
 	}
