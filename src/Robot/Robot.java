@@ -65,8 +65,8 @@ public class Robot {
 	}
 	
 	final float sensitivity = 1.0f;
-	final int zrychlenie = 700;//500;
-	final int default_spomalenie = 500;//450
+	final int zrychlenie = 1200;//500;
+	final int default_spomalenie = 550;//450
 	final float maxSpeed;
 	
 	public void dopredu(double vzd) throws InterruptedException {
@@ -148,6 +148,15 @@ public class Robot {
 	public void PIDdopredu(double vzd, float rychlost) throws InterruptedException {//0.019,-0.0095
 		PIDControlledMovementRatio PIDdopredu = new PIDControlledMovementRatio(chassis, rychlost, gyroSensor, PIDdopreduPomer);
 		PIDdopredu.execute(zrychlenie, chassis.lengthToAngle(vzd));
+	}
+	
+	public void dopreduGyroUhol(double vzd, float rychlost, float zabacanie) throws InterruptedException {
+		gyroSensor.nastavMod(1);
+		PIDController lavypid = new PIDController(-0.1,-3,0);
+		PIDController pravypid = new PIDController(0.1,3,0);
+		PIDControlledMovement pid = new PIDControlledMovement(chassis, gyroSensor, pravypid, lavypid, rychlost);
+		
+		pid.execute(zrychlenie, chassis.lengthToAngle(vzd),default_spomalenie,zabacanie);
 	}
 	
 	public void otocitPoUhol(float rychlost1, float rychlost2, float chcenyuhol) throws InterruptedException {

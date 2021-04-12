@@ -38,7 +38,7 @@ public class Chassis {
 	}
 	
 	public boolean isMoving() {
-		return left.isMoving() || right.isMoving();
+		return left.isMoving() && right.isMoving();//||
 	}
 	
 	public boolean isMovingbezgyra() {

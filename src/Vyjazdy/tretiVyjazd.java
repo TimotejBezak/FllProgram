@@ -22,6 +22,11 @@ public class tretiVyjazd extends Vyjazd {
 	
 	@Override
 	protected void Spusti() throws InterruptedException {
+		//robot.dopredubezgyra(-1.20,350,0.996f);
+		//robot.dopredubezgyra(-1.20, 350, 0.997f);
+		
+		robot.dopreduGyroUhol(-1.20, 450, 5);//12
+		
 		
 		//while(true) {
 		//	System.out.println("farba je "+robot.getLavyFarba());
@@ -31,7 +36,7 @@ public class tretiVyjazd extends Vyjazd {
 		
 		//robot.dopredubezgyra(-0.50, 200, 0.82f);
 		
-		robot.dopredu(-0.80,600);
+		//robot.dopredu(-0.80,600);
 		
 		//robot.lineFollowerPravy(100, 2.00, 200, 200);
 		

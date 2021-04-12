@@ -22,7 +22,7 @@ public class stvrtyVyjazd extends Vyjazd {
 		
 		//robot.dopredu(2.00);
 		
-		robot.dopredu(0.465,700);
+		robot.dopredu(0.485,700);
 		robot.dopredu(-0.25,700);//0.29
 		
 		
