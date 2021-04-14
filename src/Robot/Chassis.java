@@ -13,7 +13,13 @@ public class Chassis {
 	public Chassis(Port left, Port right) {
 		this.left = new EV3LargeRegulatedMotor(left);
 		this.right = new EV3LargeRegulatedMotor(right);
+		nastavitZasekavanie();
 		this.left.synchronizeWith(new RegulatedMotor[] {this.right});
+	}
+	
+	private void nastavitZasekavanie() {
+		left.setStallThreshold(10000, 10000);
+		right.setStallThreshold(10000, 10000);
 	}
 	
 	public float getMaxSpeed() {

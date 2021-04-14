@@ -25,12 +25,26 @@ public class tretiVyjazd extends Vyjazd {
 		//robot.dopredubezgyra(-1.20,350,0.996f);
 		//robot.dopredubezgyra(-1.20, 350, 0.997f);
 		
-		robot.dopreduGyroUhol(-1.20, 450, 5);//12
+		//robot.dopredubezgyra(1.20, 400, 1.029f);
 		
 		
-		//while(true) {
-		//	System.out.println("farba je "+robot.getLavyFarba());
-		//}
+		
+//		robot.dopredu(1.44,700);//idenie popri stene
+//		robot.otocitPoUhol(100, 500, 87);
+//		robot.dopredu(0.295,400);
+//		robot.otocitPoUhol(-1100, -120, 180);
+//		robot.dopredu(0.27,400);//prichadzanie k pneumatikam
+		robot.OtocZadny(6*360);
+		robot.dozadu(0.22, 400);
+		robot.dopredu(0.18, 400);
+		robot.dozadu(0.075, 300);
+		robot.otocitPoUhol(300, -300, -45);
+		
+		
+		
+		
+		
+		
 		
 		//robot.dopredu(1.80,600);
 		

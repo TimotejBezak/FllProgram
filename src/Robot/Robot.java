@@ -51,7 +51,12 @@ public class Robot {
 	}
 	
 	public void OtocZadny(int stupne) {
+		zadny.setSpeed(zadny.getMaxSpeed());
 		zadny.rotate(stupne);
+	}
+	
+	public void OtocPoZaseknutie() {
+		//zadny.
 	}
 	
 	public void Stop() {
@@ -152,8 +157,8 @@ public class Robot {
 	
 	public void dopreduGyroUhol(double vzd, float rychlost, float zabacanie) throws InterruptedException {
 		gyroSensor.nastavMod(1);
-		PIDController lavypid = new PIDController(-0.1,-3,0);
-		PIDController pravypid = new PIDController(0.1,3,0);
+		PIDController lavypid = new PIDController(0.1,3,0);
+		PIDController pravypid = new PIDController(-0.1,-3,0);
 		PIDControlledMovement pid = new PIDControlledMovement(chassis, gyroSensor, pravypid, lavypid, rychlost);
 		
 		pid.execute(zrychlenie, chassis.lengthToAngle(vzd),default_spomalenie,zabacanie);
