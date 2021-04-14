@@ -51,12 +51,22 @@ public class Robot {
 	}
 	
 	public void OtocZadny(int stupne) {
+		OtocZadny(stupne,true);
+	}
+	
+	public void OtocZadny(int stupne,boolean cakaj) {
+		nastavitZasekavanie();
 		zadny.setSpeed(zadny.getMaxSpeed());
-		zadny.rotate(stupne);
+		zadny.rotate(stupne, !cakaj);
 	}
 	
 	public void OtocPoZaseknutie() {
 		//zadny.
+	}
+	
+	public void nastavitZasekavanie() {
+		predny.setStallThreshold(10000, 10000);
+		zadny.setStallThreshold(10000, 10000);
 	}
 	
 	public void Stop() {

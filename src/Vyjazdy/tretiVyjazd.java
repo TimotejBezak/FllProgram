@@ -29,21 +29,42 @@ public class tretiVyjazd extends Vyjazd {
 		
 		
 		
-//		robot.dopredu(1.44,700);//idenie popri stene
-//		robot.otocitPoUhol(100, 500, 87);
-//		robot.dopredu(0.295,400);
-//		robot.otocitPoUhol(-1100, -120, 180);
-//		robot.dopredu(0.27,400);//prichadzanie k pneumatikam
-		robot.OtocZadny(6*360);
+		robot.otocitPoUhol(100, 0, -3);
+		//robot.dopredu(1.44,700);//idenie popri stene
+		robot.dopredubezgyra(1.45, 700);
+		robot.otocitPoUhol(100, 500, 87);
+		robot.dopredu(0.285,400);//0.295
+		robot.OtocZadny(3*360, false);
+		robot.otocitPoUhol(-600, -84, 180);//-1100,-120
+		robot.dopredu(0.245,400);//prichadzanie k pneumatikam
+		robot.OtocZadny(8*360);
 		robot.dozadu(0.22, 400);
-		robot.dopredu(0.18, 400);
-		robot.dozadu(0.075, 300);
-		robot.otocitPoUhol(300, -300, -45);
+		robot.otocitPoUhol(120, 0, 180-6);
+		robot.dopredu(0.16, 400);
+		
+		robot.OtocPredny(360,true);//zhadzovanie panaka
+		robot.OtocPredny(-360, true);
+		
+		robot.dozadu(0.09, 300);
+		robot.otocitPoUhol(100, -400, -60+180);
+		robot.dozadu(0.145,300);
+		robot.otocitPoUhol(-400, -30, 180);
+		robot.OtocZadny(-10*360,false);
+		robot.dozadu(0.25,300);
+		
+		robot.OtocPredny(360,true);//posuvanie modreho kolesa
+		
+		robot.dopredu(0.12,250);
+		robot.OtocZadny(5*360, false);
+		robot.otocitPoUhol(100, 0, 180-12);
+		
+		robot.OtocPredny(-360, true);
 		
 		
+		robot.otocitPoUhol(100, 400, 180+45);
+		robot.dopredu(0.05,100);
 		
-		
-		
+		robot.otocitPoUhol(-250, -500, 180);
 		
 		
 		//robot.dopredu(1.80,600);
