@@ -22,7 +22,7 @@ public class Farebnik implements Sensor {
 
 	@Override
 	public float getError(float hodnota) {
-		return hodnota-chcenaHodnota;
+		return 100*(hodnota-chcenaHodnota);
 	}
 	
 	public void reset() {

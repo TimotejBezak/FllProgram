@@ -29,7 +29,7 @@ public class PIDControlledMovement extends ControlledMovement {
 			if(speed < 160 && predoslaRychlost < speed) senzitivita = 1000;
 			else senzitivita = 250;*/
 
-	private float PIDmaxVal=50;
+	private float PIDmaxVal=100050;
 	@Override
 	protected float getLeftSpeed(float hodnota) {
 		float vysledokzpidu = (float)leftController.getOutput(sensor.getError(hodnota));

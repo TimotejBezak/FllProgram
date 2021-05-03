@@ -22,28 +22,29 @@ public class PrvyVyjazd extends Vyjazd {
 	
 	protected void Spusti() throws InterruptedException {
 		robot.dopredu(0.66, 600);//678
-		robot.otocitPoUhol(200/3*2, 650/3*2, 73);//78
+		robot.otocitPoUhol(200,650, 73);//200/3*2, 650/3*2  78
 		robot.dopredu(0.128, 500);
 		// Basketbalovy kos
 		robot.OtocPredny((int)-6.5*360, true);
 		robot.OtocPredny(360, false);
-		robot.dozadu(0.13, 600);//0.135
+		robot.dozadu(0.13, 800);//0.135
 		robot.OtocPredny(-200, false);
-		robot.otocitPoUhol(200, 0, 33);
+		float uhol1 = 33;
+		robot.otocitPoUhol(480, 0, uhol1);
 		robot.dopredu(0.08,100);//spustanie modrej kocky
 		
-		robot.dozadu(0.35,600);
-		robot.otocitPoUhol(400, 200, -27);//-28    -24
-		robot.dopredu(0.2425,600);
+		robot.dozadu(0.35,620,uhol1);
+		robot.otocitPoUhol(700, 350, -27);//-28    -24
+		robot.dopredu(0.2525,600);//0.2425
 		
 		robot.OtocZadny(200);//vyklapanie kociek
 		robot.OtocZadny(-220);//odklapanie kociek
 		
-		robot.otocitPoUhol(-500, -30, 32);//presun k panakom
+		robot.otocitPoUhol(-500, -30, 35);//presun k panakom  32
 		robot.otocitPoUhol(-40, -500, -23);//presun k panakom
 		
-		robot.dopredubezgyra(-0.40, 100,0.96f);//zhadzovanie panakov    -0.25
-		robot.dopredubezgyra(-0.56, 600);//navrat do basu
+		robot.dopredubezgyra(-0.40, 150,0.96f);//zhadzovanie panakov    -0.25
+		robot.dopredubezgyra(-0.62, 800);//navrat do basu
 	 
 		assert robot != null;
 		

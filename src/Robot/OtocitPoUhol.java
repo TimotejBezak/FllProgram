@@ -17,7 +17,8 @@ public class OtocitPoUhol extends ControlledMovement {
 	}
 	
 	float p = 4.0f;
-	float minimalnaRychlost = 0.2f;
+	float minimalnaRychlost = 0.4f;//0.2
+	float minimalnaRychlostSpomalenie = 0.25f;
 	
 	
 	float rychlostpodlauhlu(float x) {
@@ -28,6 +29,7 @@ public class OtocitPoUhol extends ControlledMovement {
 		if(x <= 1/p) vysledok = p*x;
 		else vysledok = -(p/(p-1))*x+1+1/(p-1);
 		if(vysledok <= minimalnaRychlost && x < 0.5) return minimalnaRychlost;
+		if(vysledok <= minimalnaRychlostSpomalenie && x>0.5) return minimalnaRychlostSpomalenie;
 		else return vysledok;
 	}
 	

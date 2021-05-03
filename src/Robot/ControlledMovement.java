@@ -30,7 +30,7 @@ public abstract class ControlledMovement {
 		
 		this.rychlost_gyra_do_grafu.add(hodnota);			
 		this.sensor.nastavMod(0);//odkomentovat ked sa negrafuje
-		this.uhly_gyra_do_grafu.add(sensor.getValue());
+		this.uhly_gyra_do_grafu.add(sensor.getError(hodnota));
 		this.sensor.nastavMod(1);
 		
 		try {

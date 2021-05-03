@@ -80,8 +80,10 @@ public class Robot {
 	}
 	
 	final float sensitivity = 1.0f;
-	final int zrychlenie = 1200;//500;
-	final int default_spomalenie = 550;//450
+	final int zrychlenie = 1400;//500;
+	final int default_spomalenie = 860;//450, 550
+	final int zrychlenie_cuvanie = 700;//1200;
+	final int spomalenie_cuvanie = 400;
 	final float maxSpeed;
 	
 	public void dopredu(double vzd) throws InterruptedException {
@@ -96,12 +98,23 @@ public class Robot {
 		dopredu(-vzd);
 	}
 	
+	public void dozadu(double vzd, float rychlost, float targetUhol) throws InterruptedException {
+		dopredu(-vzd,rychlost,targetUhol);
+	}
+	
 	public void dopredu(double vzd, float rychlost) throws InterruptedException {
-		PIDdopredu2(vzd, rychlost, default_spomalenie);
+		if(vzd > 0)PIDdopredu2(vzd, rychlost, default_spomalenie);
+		else PIDdopredu2(vzd, rychlost, spomalenie_cuvanie);
 	}
 	
 	public void dopredu(double vzd, float rychlost, int spomalenie) throws InterruptedException {
 		PIDdopredu2(vzd, rychlost, spomalenie);
+	}
+
+	public void dopredu(double vzd, float rychlost, float targetUhol) throws InterruptedException {
+		gyroSensor.NastavTargetUhol((int)targetUhol);
+		PIDdopredu2(vzd, rychlost, default_spomalenie);
+		gyroSensor.NastavTargetUhol(0);
 	}
 	
 	public void dopredubezgyra(double vzd, float rychlost) {
@@ -120,9 +133,11 @@ public class Robot {
 	public void lineFollowerPravy(float speed, double vzd, int zrychlenie, int spomalenie) throws InterruptedException {
 		//PIDController lavy = new PIDController(0.2, 0, 0.3);//0.2,0,0.1  -0.2/6,0,-0.1/6		200,10            pre rychlost 100 optimalne 0.75,0,0 a -0.125,0,0
 		//PIDController pravy = new PIDController(-0.2/6, 0, -0.3/6);//140,0,-10
-		PIDController lavy = new PIDController(100, 0, 100.0);//0.2,0,0.1  -0.2/6,0,-0.1/6		200,10            pre rychlost 100 optimalne 0.75,0,0 a -0.125,0,0
-		PIDController pravy = new PIDController(-100/8, 0, -100.0/8);
-		PIDControlledMovement pid = new PIDControlledMovement(chassis, pravyFarebnik, pravy, lavy, speed);
+		//PIDController lavy = new PIDController(100, 0, 100.0);//                               0.2,0,0.1  -0.2/6,0,-0.1/6		200,10            pre rychlost 100 optimalne 0.75,0,0 a -0.125,0,0
+		//PIDController pravy = new PIDController(-100/8, 0, -100.0/8);
+		PIDController lavy = new PIDController(0.075*17, 0, 0.02*17);//d-0.0075                               0.2,0,0.1  -0.2/6,0,-0.1/6		200,10            pre rychlost 100 optimalne 0.75,0,0 a -0.125,0,0
+		PIDController pravy = new PIDController(-0.075*9.5, 0, -0.02*9.5);
+		PIDControlledMovement pid = new PIDControlledMovement(chassis, pravyFarebnik, pravy, lavy, speed);//17,9.5
 		pid.execute(zrychlenie, chassis.lengthToAngle(vzd),spomalenie);
 	}
 	
@@ -145,17 +160,19 @@ public class Robot {
 		gyroSensor.nastavMod(1);
 		//PIDdopreduLavy = new PIDController(3.2,2,0);
 		//PIDdopreduPravy = new PIDController(-3.2,-2,0);
+		int zrychlenieTeraz = zrychlenie;
 		PIDController lavypid,pravypid;
 		if(vzd > 0) {
 			lavypid = PIDdopreduLavy;
 			pravypid = PIDdopreduPravy;
 		}else {
+			zrychlenieTeraz = zrychlenie_cuvanie;
 			lavypid = PIDdozaduLavy;
 			pravypid = PIDdozaduPravy;
 		}
 		PIDControlledMovement pid = new PIDControlledMovement(chassis, gyroSensor, pravypid, lavypid, speed);
 		
-		pid.execute(zrychlenie, chassis.lengthToAngle(vzd),spomalenie);
+		pid.execute(zrychlenieTeraz, chassis.lengthToAngle(vzd),spomalenie);
 	}
 	
 	
@@ -172,6 +189,16 @@ public class Robot {
 		PIDControlledMovement pid = new PIDControlledMovement(chassis, gyroSensor, pravypid, lavypid, rychlost);
 		
 		pid.execute(zrychlenie, chassis.lengthToAngle(vzd),default_spomalenie,zabacanie);
+	}
+	
+	public void zarovnatNaUhol(float uhol) throws InterruptedException {
+		gyroSensor.nastavMod(0);
+		float uholTeraz = gyroSensor.getValue();
+		if(uhol > uholTeraz) {
+			otocitPoUhol(-40,40,uhol);
+		}else {
+			otocitPoUhol(40,-40,uhol);
+		}
 	}
 	
 	public void otocitPoUhol(float rychlost1, float rychlost2, float chcenyuhol) throws InterruptedException {

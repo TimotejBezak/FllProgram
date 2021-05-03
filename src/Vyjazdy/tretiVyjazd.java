@@ -1,6 +1,7 @@
 package Vyjazdy;
 
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 import Robot.PIDController;
 import pack.Vyjazd;
@@ -26,46 +27,73 @@ public class tretiVyjazd extends Vyjazd {
 		//robot.dopredubezgyra(-1.20, 350, 0.997f);
 		
 		//robot.dopredubezgyra(1.20, 400, 1.029f);
-		
-		
+		//TimeUnit.SECONDS.sleep(10);
 		
 		robot.otocitPoUhol(100, 0, -3);
 		//robot.dopredu(1.44,700);//idenie popri stene
-		robot.dopredubezgyra(1.45, 700);
-		robot.otocitPoUhol(100, 500, 87);
-		robot.dopredu(0.285,400);//0.295
-		robot.OtocZadny(3*360, false);
-		robot.otocitPoUhol(-600, -84, 180);//-1100,-120
-		robot.dopredu(0.245,400);//prichadzanie k pneumatikam
-		robot.OtocZadny(8*360);
-		robot.dozadu(0.22, 400);
-		robot.otocitPoUhol(120, 0, 180-6);
-		robot.dopredu(0.16, 400);
+		robot.dopredubezgyra(1.438, 700);//1.443
+		//TimeUnit.SECONDS.sleep(10);
+		float uhol1 = 87;
+		robot.otocitPoUhol(120, 600, uhol1);//100,500
+		//TimeUnit.SECONDS.sleep(10);
+		robot.dopredu(0.285,600,uhol1);//0.295
+		//TimeUnit.SECONDS.sleep(10);
+		robot.OtocZadny(4*360+240, false);//davanie radlice trosku dole
+		//TimeUnit.SECONDS.sleep(10);
+		float uhol2 = 178;
+		robot.otocitPoUhol(-600, -79, uhol2);//-1100,-120        -84   strasidelna otocka
+		//TimeUnit.SECONDS.sleep(10);
+		robot.dopredu(0.26,400,uhol2);//prichadzanie k pneumatikam
+		//TimeUnit.SECONDS.sleep(10);
+		robot.OtocZadny(9*360);//naklapanie radlice na pneumatiky
+		//TimeUnit.SECONDS.sleep(10);
+		robot.dozadu(0.22, 400,uhol2);//preklapanie pneumatik
+		
+		//robot.zarovnatNaUhol(uhol2);
+												//robot.otocitPoUhol(200, 0, 180-6);
+		//TimeUnit.SECONDS.sleep(10);
+		robot.dopredu(0.15, 600,uhol2);//0.16   dotlacenie pneunmatik do kruhu
+		//TimeUnit.SECONDS.sleep(10);
 		
 		robot.OtocPredny(360,true);//zhadzovanie panaka
 		robot.OtocPredny(-360, true);
 		
-		robot.dozadu(0.09, 300);
-		robot.otocitPoUhol(100, -400, -60+180);
-		robot.dozadu(0.145,300);
-		robot.otocitPoUhol(-400, -30, 180);
-		robot.OtocZadny(-10*360,false);
-		robot.dozadu(0.25,300);
+		//TimeUnit.SECONDS.sleep(10);
+		robot.dozadu(0.09, 700, uhol2);//cuvanie aby sa mohol otocit bez toho aby zavadil o pneumatiky
+		//TimeUnit.SECONDS.sleep(10);
+		float uhol3 = -60+180;
+		robot.otocitPoUhol(200, -800, uhol3);//100,-400
+		robot.dozadu(0.205,450,uhol3);//0.195
+		//TimeUnit.SECONDS.sleep(10);
+		robot.otocitPoUhol(-300, 180, uhol2-5);//-300,180
+		//TimeUnit.SECONDS.sleep(10);
+		robot.OtocZadny(-10*360,false);//tocenie kolesom
+		//TimeUnit.SECONDS.sleep(10);
+		robot.dozadu(0.28,600,uhol2-5);//cuvanie po stenu
 		
-		robot.OtocPredny(360,true);//posuvanie modreho kolesa
+		robot.OtocPredny(110,true);//chytenie modreho kolesa
 		
-		robot.dopredu(0.12,250);
-		robot.OtocZadny(5*360, false);
-		robot.otocitPoUhol(100, 0, 180-12);
+		//TimeUnit.SECONDS.sleep(10);
+		robot.dopredu(0.13,300);//0.12  posuvanie modreho kolesa
+		//TimeUnit.SECONDS.sleep(10);
+		robot.OtocZadny(7*360, false);//posunutie radlice dole
+		//TimeUnit.SECONDS.sleep(10);
+		robot.otocitPoUhol(100, 0, 180-10);// posunutie malej modrej pneumatiky do kruhu
+		//TimeUnit.SECONDS.sleep(10);
 		
-		robot.OtocPredny(-360, true);
+		robot.OtocPredny(-110, true);
 		
+		float uhol4 = 180+40;
+		//TimeUnit.SECONDS.sleep(10);
+		robot.otocitPoUhol(200, 800, uhol4);
+		//TimeUnit.SECONDS.sleep(10);
+		robot.dopredu(0.10,270,uhol4);// idenie k jednotke zdravia
 		
-		robot.otocitPoUhol(100, 400, 180+45);
-		robot.dopredu(0.05,100);
+		//TimeUnit.SECONDS.sleep(10);
+		robot.otocitPoUhol(-80, -500, uhol2);// zobratie jednotky zdravia   -80,-500
 		
-		robot.otocitPoUhol(-250, -500, 180);
-		
+		robot.otocitPoUhol(0, 150, uhol2+5);//vratenie do basu
+		robot.dopredubezgyra(1.7, 700, 0.95f);//1.5
 		
 		//robot.dopredu(1.80,600);
 		

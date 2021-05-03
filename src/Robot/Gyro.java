@@ -7,6 +7,11 @@ public class Gyro implements Sensor {
 	private EV3GyroSensor gyro;
 	private float uholPredResetom;
 	private int mod;
+	private int targetUhol = 0;
+	
+	public void NastavTargetUhol(int val) {
+		targetUhol = val;
+	}
 	
 	public void reset() {
 		int predoslyMod = this.mod;
@@ -44,7 +49,7 @@ public class Gyro implements Sensor {
 	}
 	
 	public float getError(float hodnota) {
-		return hodnota;//-uholPredresetom
+		return hodnota - targetUhol;//-uholPredresetom
 	}
 
 }
