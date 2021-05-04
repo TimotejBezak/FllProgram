@@ -23,7 +23,7 @@ public class PrvyVyjazd extends Vyjazd {
 	protected void Spusti() throws InterruptedException {
 		robot.dopredu(0.66, 600);//678
 		robot.otocitPoUhol(200,650, 73);//200/3*2, 650/3*2  78
-		robot.dopredu(0.128, 500);
+		robot.dopredu(0.128, 300);
 		// Basketbalovy kos
 		robot.OtocPredny((int)-6.5*360, true);
 		robot.OtocPredny(360, false);
@@ -35,7 +35,7 @@ public class PrvyVyjazd extends Vyjazd {
 		
 		robot.dozadu(0.35,620,uhol1);
 		robot.otocitPoUhol(700, 350, -27);//-28    -24
-		robot.dopredu(0.2525,600);//0.2425
+		robot.dopredu(0.2375,600);//0.2525
 		
 		robot.OtocZadny(200);//vyklapanie kociek
 		robot.OtocZadny(-220);//odklapanie kociek

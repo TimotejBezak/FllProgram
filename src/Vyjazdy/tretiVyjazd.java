@@ -43,7 +43,7 @@ public class tretiVyjazd extends Vyjazd {
 		float uhol2 = 178;
 		robot.otocitPoUhol(-600, -79, uhol2);//-1100,-120        -84   strasidelna otocka
 		//TimeUnit.SECONDS.sleep(10);
-		robot.dopredu(0.26,400,uhol2);//prichadzanie k pneumatikam
+		robot.dopredu(0.27,400,uhol2);//prichadzanie k pneumatikam
 		//TimeUnit.SECONDS.sleep(10);
 		robot.OtocZadny(9*360);//naklapanie radlice na pneumatiky
 		//TimeUnit.SECONDS.sleep(10);
@@ -69,7 +69,7 @@ public class tretiVyjazd extends Vyjazd {
 		//TimeUnit.SECONDS.sleep(10);
 		robot.OtocZadny(-10*360,false);//tocenie kolesom
 		//TimeUnit.SECONDS.sleep(10);
-		robot.dozadu(0.28,600,uhol2-5);//cuvanie po stenu
+		robot.dozadu(0.31,600,uhol2-5);//cuvanie po stenu
 		
 		robot.OtocPredny(110,true);//chytenie modreho kolesa
 		
@@ -92,7 +92,7 @@ public class tretiVyjazd extends Vyjazd {
 		//TimeUnit.SECONDS.sleep(10);
 		robot.otocitPoUhol(-80, -500, uhol2);// zobratie jednotky zdravia   -80,-500
 		
-		robot.otocitPoUhol(0, 150, uhol2+5);//vratenie do basu
+		//robot.otocitPoUhol(0, 150, uhol2+5);//vratenie do basu
 		robot.dopredubezgyra(1.7, 700, 0.95f);//1.5
 		
 		//robot.dopredu(1.80,600);
