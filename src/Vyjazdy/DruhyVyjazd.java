@@ -24,10 +24,25 @@ public class DruhyVyjazd extends Vyjazd {
 	@Override
 	protected void Spusti() throws InterruptedException {
 		// TODO Auto-generated method stub
+		int otocenieRadlice = 1000;
+		robot.OtocZadny(otocenieRadlice, false);
+		robot.otocitPoUhol(700, 250, -35);
+		robot.dopredu(0.465, 700);
+		robot.otocitPoUhol(800, 400, -90);
+		robot.dopredu(0.46+0.12);
+		robot.otocitPoUhol(200, 700, -40);//400,700,-54
+		robot.OtocZadny(-otocenieRadlice);
+		robot.OtocZadny(otocenieRadlice, false);
+		robot.otocitPoUhol(-700, -70, 15);
+		robot.dopredu(0.17,600);
+		robot.OtocZadny(-otocenieRadlice);
+		robot.dopredu(-0.12, 600);
+		robot.otocitPoUhol(200, -200, -90);
+		
 		//Delay.msDelay(5000);
 		//robot.OtocPredny(720, true);
 		
-		robot.lineFollowerPravy(250, 2.00, 300, 300);
+		//robot.lineFollowerPravy(250, 2.00, 300, 300);
 		
 		
 		//for(int i=0;i<10;i++) {
