@@ -49,7 +49,7 @@ public class Gyro implements Sensor {
 	}
 	
 	public float getError(float hodnota) {
-		return hodnota - targetUhol;//-uholPredresetom
+		return hodnota;//-uholPredresetom
 	}
 
 }

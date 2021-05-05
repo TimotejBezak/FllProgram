@@ -31,20 +31,20 @@ public class PrvyVyjazd extends Vyjazd {
 		robot.OtocPredny(-200, false);
 		float uhol1 = 33;
 		robot.otocitPoUhol(480, 0, uhol1);
-		robot.dopredu(0.08,100);//spustanie modrej kocky
+		robot.dopredu(0.087,100);//spustanie modrej kocky
 		
-		robot.dozadu(0.35,620,uhol1);
+		robot.dozadu(0.36,620,uhol1);
 		robot.otocitPoUhol(700, 350, -27);//-28    -24
-		robot.dopredu(0.2375,600);//0.2525
+		robot.dopredu(0.2075,600);//0.2525
 		
 		robot.OtocZadny(200);//vyklapanie kociek
 		robot.OtocZadny(-220);//odklapanie kociek
 		
-		robot.otocitPoUhol(-500, -30, 35);//presun k panakom  32
+		robot.otocitPoUhol(-500, -30, 38);//presun k panakom  32
 		robot.otocitPoUhol(-40, -500, -23);//presun k panakom
 		
 		robot.dopredubezgyra(-0.40, 150,0.96f);//zhadzovanie panakov    -0.25
-		robot.dopredubezgyra(-0.62, 800);//navrat do basu
+		robot.dopredubezgyra(-0.64, 800, 1.4f);//navrat do basu
 	 
 		assert robot != null;
 		
