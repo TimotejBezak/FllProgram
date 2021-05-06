@@ -36,7 +36,7 @@ public class tretiVyjazd extends Vyjazd {
 		float uhol1 = 87;
 		robot.otocitPoUhol(120, 600, uhol1);//100,500
 		//TimeUnit.SECONDS.sleep(10);
-		robot.dopredu(0.2825,600,uhol1);//0.295
+		robot.dopredu(0.2775,600,uhol1);//0.2825
 		//TimeUnit.SECONDS.sleep(10);
 		robot.OtocZadny(4*360+240, false);//davanie radlice trosku dole
 		//TimeUnit.SECONDS.sleep(10);
@@ -47,12 +47,12 @@ public class tretiVyjazd extends Vyjazd {
 		//TimeUnit.SECONDS.sleep(10);
 		robot.OtocZadny(9*360);//naklapanie radlice na pneumatiky
 		//TimeUnit.SECONDS.sleep(10);
-		robot.dozadu(0.22, 400,uhol2);//preklapanie pneumatik
+		robot.dozadu(0.23, 400,uhol2);//preklapanie pneumatik 22
 		
 		//robot.zarovnatNaUhol(uhol2);
 												//robot.otocitPoUhol(200, 0, 180-6);
 		//TimeUnit.SECONDS.sleep(10);
-		robot.dopredu(0.15, 600,uhol2);//0.16   dotlacenie pneunmatik do kruhu
+		robot.dopredu(0.16, 600,uhol2);//0.16   dotlacenie pneunmatik do kruhu
 		//TimeUnit.SECONDS.sleep(10);
 		
 		robot.OtocPredny(360,true);//zhadzovanie panaka
@@ -85,15 +85,15 @@ public class tretiVyjazd extends Vyjazd {
 		
 		float uhol4 = 180+40-10;
 		//TimeUnit.SECONDS.sleep(10);
-		robot.otocitPoUhol(200, 800, uhol4);
+		robot.otocitPoUhol(200, 800, uhol4);													// adam > timo
 		//TimeUnit.SECONDS.sleep(10);
 		robot.dopredu(0.10,270,uhol4);// idenie k jednotke zdravia
 		
 		//TimeUnit.SECONDS.sleep(10);
-		robot.otocitPoUhol(-80, -500, uhol2+15);// zobratie jednotky zdravia   -80,-500
+		robot.otocitPoUhol(-80, -500, uhol2);// zobratie jednotky zdravia   -80,-500
 		
-		//robot.otocitPoUhol(0, 150, uhol2+5);//vratenie do basu
-		robot.dopredubezgyra(1.7, 700, 0.91f);//1.5
+		robot.otocitPoUhol(0, 150, uhol2+5);//vratenie do basu
+		robot.dopredubezgyra(1.7, 700, 0.86f);//1.5
 		
 		//robot.dopredu(1.80,600);
 		

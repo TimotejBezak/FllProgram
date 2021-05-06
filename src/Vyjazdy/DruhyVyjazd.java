@@ -26,18 +26,20 @@ public class DruhyVyjazd extends Vyjazd {
 		// TODO Auto-generated method stub
 		int otocenieRadlice = 1000;
 		robot.OtocZadny(otocenieRadlice, false);
-		robot.otocitPoUhol(700, 250, -35);
-		robot.dopredu(0.465, 700);
-		robot.otocitPoUhol(800, 400, -90);
-		robot.dopredu(0.46+0.12);
+		robot.otocitPoUhol(600, 214, -35);//lavarychlost,pravarychlost,uhol-zaporny vpravo // 700, 250
+		robot.dopredu(0.55, 700); // 0.490
+		robot.otocitPoUhol(600, 300, -87); // 700 400
+		robot.dopredu(0.59); // .58
 		robot.otocitPoUhol(200, 700, -40);//400,700,-54
 		robot.OtocZadny(-otocenieRadlice);
 		robot.OtocZadny(otocenieRadlice, false);
-		robot.otocitPoUhol(-700, -70, 15);
-		robot.dopredu(0.17,600);
+		robot.otocitPoUhol(-500, 120, 25); // - 0 (druhe) 21
+		robot.dopredu(0.24,600); 																				// som lepsi ako timo
 		robot.OtocZadny(-otocenieRadlice);
-		robot.dopredu(-0.12, 600);
-		robot.otocitPoUhol(200, -200, -90);
+		robot.dopredu(-0.28, 600);
+		robot.otocitPoUhol(200, -200, -95);
+		robot.dopredu(0.10, 600);
+		robot.dozadu(1, 600);
 		
 		//Delay.msDelay(5000);
 		//robot.OtocPredny(720, true);
