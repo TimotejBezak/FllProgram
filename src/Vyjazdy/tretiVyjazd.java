@@ -36,8 +36,9 @@ public class tretiVyjazd extends Vyjazd {
 		float uhol1 = 87;
 		robot.otocitPoUhol(120, 600, uhol1);//100,500
 		//TimeUnit.SECONDS.sleep(10);
-		robot.dopredu(0.2775,600,uhol1);//0.2825
-		//TimeUnit.SECONDS.sleep(10);
+		robot.dopredu(0.2775 + 0.12,600,uhol1);//0.2825
+		TimeUnit.SECONDS.sleep(3);
+		robot.dozadu(0.12, 600);
 		robot.OtocZadny(4*360+240, false);//davanie radlice trosku dole
 		//TimeUnit.SECONDS.sleep(10);
 		float uhol2 = 178;

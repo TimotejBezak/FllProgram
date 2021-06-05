@@ -175,13 +175,6 @@ public class Robot {
 		pid.execute(zrychlenieTeraz, chassis.lengthToAngle(vzd),spomalenie);
 	}
 	
-	
-	 
-	public void PIDdopredu(double vzd, float rychlost) throws InterruptedException {//0.019,-0.0095
-		PIDControlledMovementRatio PIDdopredu = new PIDControlledMovementRatio(chassis, rychlost, gyroSensor, PIDdopreduPomer);
-		PIDdopredu.execute(zrychlenie, chassis.lengthToAngle(vzd));
-	}
-	
 	public void dopreduGyroUhol(double vzd, float rychlost, float zabacanie) throws InterruptedException {
 		gyroSensor.nastavMod(1);
 		PIDController lavypid = new PIDController(0.1,3,0);
@@ -206,5 +199,20 @@ public class Robot {
 		OtocitPoUhol volaco = new OtocitPoUhol(rychlost1,rychlost2,chcenyuhol,chassis,gyroSensor);
 		volaco.execute(0,0);
 		gyroSensor.nastavMod(1);
+	}
+	
+	public void PIDpoCiaru(float rychlost, double vzd, Farebnik farebnik) throws InterruptedException {
+		int zrychlenieTeraz = zrychlenie;
+		PIDController lavypid,pravypid;
+		if(vzd > 0) {
+			lavypid = PIDdopreduLavy;
+			pravypid = PIDdopreduPravy;
+		}else {
+			zrychlenieTeraz = zrychlenie_cuvanie;
+			lavypid = PIDdozaduLavy;
+			pravypid = PIDdozaduPravy;
+		}
+		PIDPoCiaru pid = new PIDPoCiaru(chassis,rychlost,farebnik,pravypid,lavypid);
+		pid.execute(zrychlenieTeraz, chassis.lengthToAngle(vzd),default_spomalenie);
 	}
 }

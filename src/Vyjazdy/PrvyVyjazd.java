@@ -26,9 +26,9 @@ public class PrvyVyjazd extends Vyjazd {
 		robot.dopredu(0.128, 300);
 		// Basketbalovy kos
 		robot.OtocPredny((int)-6.5*360, true);
-		robot.OtocPredny(360, false);
+		robot.OtocPredny(460, false); // 360
 		robot.dozadu(0.13, 800);//0.135
-		robot.OtocPredny(-200, false);
+		robot.OtocPredny(-300, false); //-200
 		float uhol1 = 33;
 		robot.otocitPoUhol(480, 0, uhol1);
 		robot.dopredu(0.087,100);//spustanie modrej kocky
