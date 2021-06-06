@@ -23,8 +23,12 @@ public class DruhyVyjazd extends Vyjazd {
 
 	@Override
 	protected void Spusti() throws InterruptedException {
-		// robot.PIDpoCiaru(300, 0.2, robot.lavyFarebnik);
-		robot.dozadu(0.5, 600);
+		//robot.PIDpoCiaru(300, 0.2, robot.lavyFarebnik);
+		//robot.otocitPoCiaru(100, -100, robot.lavyFarebnik);
+		
+		robot.dopreduZarovnatNaCiaru(698,-1);
+		
+		//robot.dozadu(0.5, 600);
 		
 		
 //		int otocenieRadlice = 1000;

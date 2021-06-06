@@ -44,7 +44,7 @@ public class PrvyVyjazd extends Vyjazd {
 		robot.otocitPoUhol(-40, -500, -23);//presun k panakom
 		
 		robot.dopredubezgyra(-0.40, 150,0.96f);//zhadzovanie panakov    -0.25
-		robot.dopredubezgyra(-0.64, 800, 1.4f);//navrat do basu
+		robot.dopredubezgyra(-0.64, 800, 0.7f);//navrat do basu
 	 
 		assert robot != null;
 		

@@ -27,18 +27,21 @@ public class Farebnik implements Sensor {
 				float predosla = hodnota;
 				while(farebnik.listenThreadActive) {
 					hodnota = farebnik.getValue();
-					System.out.println("h "+hodnota);
 					if(predosla < BIELA && hodnota > BIELA) {
 						handlers.PridenieNaBielu();
+						System.out.println("Biela");
 					}
 					if(predosla > CIERNA && hodnota < CIERNA) {
 						handlers.PridenieNaCiernu();
+						System.out.println("Cierna");
 					}
 					
 					predosla = hodnota;
 				}
 			}
 		});
+		listenThread.setDaemon(true);
+		listenThread.start();
 	}
 	
 	public void RemoveHandlers() {

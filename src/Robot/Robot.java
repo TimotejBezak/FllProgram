@@ -5,6 +5,8 @@ import java.util.Map;
 import lejos.hardware.motor.EV3MediumRegulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
+import pack.Main;
+import pack.SpustacVyjazdov;
 
 public class Robot {
 	private final EV3MediumRegulatedMotor predny;
@@ -129,6 +131,12 @@ public class Robot {
 		while(chassis.isMovingbezgyra()) {}
 		Stop();
 	}
+	
+	public void dopreduBezGyra2(double vzd, float rychlost, int zrychlenie, int spomalenie) throws InterruptedException {
+		PIDController PIDnula = new PIDController(0,0,0);
+		PIDControlledMovement pid = new PIDControlledMovement(chassis, gyroSensor, PIDnula, PIDnula, rychlost);		
+		pid.execute(zrychlenie, chassis.lengthToAngle(vzd),spomalenie);
+	}
 
 	public void lineFollowerPravy(float speed, double vzd, int zrychlenie, int spomalenie) throws InterruptedException {
 		//PIDController lavy = new PIDController(0.2, 0, 0.3);//0.2,0,0.1  -0.2/6,0,-0.1/6		200,10            pre rychlost 100 optimalne 0.75,0,0 a -0.125,0,0
@@ -214,5 +222,35 @@ public class Robot {
 		}
 		PIDPoCiaru pid = new PIDPoCiaru(chassis,rychlost,farebnik,pravypid,lavypid);
 		pid.execute(zrychlenieTeraz, chassis.lengthToAngle(vzd),default_spomalenie);
+	}
+	
+	public void otocitPoCiaru(float rychlost1, float rychlost2, Farebnik farebnik) throws InterruptedException {
+		OtocitPoCiaru otocit = new OtocitPoCiaru(chassis, rychlost1, rychlost2, farebnik);
+		otocit.execute(0,0);
+	}
+	
+	public void dopreduZarovnatNaCiaru(float vzd, int strana) throws InterruptedException {
+		//this.PIDpoCiaru(300, vzd, this.lavyFarebnik);																																		
+		float stred = 0.5f;
+		float bocivost = 40*strana;
+		chassis.initSynchronizedMovement(10, 200);
+		chassis.beginForwardMovement();
+		long cas = System.currentTimeMillis();
+		while(Main.beziVyjazd()) {
+			long bezi = System.currentTimeMillis() - cas;
+			if (bezi > 5000) {
+				break;
+			}
+			float hodnotaP = this.pravyFarebnik.getValue();
+			float hodnotaL = this.lavyFarebnik.getValue();
+			float leftSpeed, rightSpeed;
+			rightSpeed = bocivost*(stred-hodnotaP);
+			leftSpeed = bocivost*(stred-hodnotaL);
+			chassis.adjustSpeed(leftSpeed, rightSpeed);
+		}
+		chassis.stopMovement();
+		if(!Main.beziVyjazd()) {
+			throw new InterruptedException();
+		}
 	}
 }

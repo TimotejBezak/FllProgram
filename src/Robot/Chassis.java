@@ -121,8 +121,35 @@ public class Chassis {
 		left.endSynchronization();
 	}
 	
+	private boolean lastLeftForward = false, lastRightForward = false;
 	public void adjustSpeed(float leftSpeed, float rightSpeed) {
 		left.startSynchronization();
+		/*
+		if (leftSpeed >= 0) {
+			if(!lastLeftForward) {
+				left.backward();
+				lastLeftForward = true;
+			}
+		} else {
+			if(lastLeftForward) {
+				left.forward();
+				lastLeftForward = false;
+			}
+			leftSpeed = -leftSpeed;
+		}
+		if (rightSpeed >= 0) {
+			if(!lastRightForward) {
+				right.backward();
+				lastRightForward = true;
+			}
+		} else {
+			if(lastRightForward) {
+				right.forward();
+				lastRightForward = false;
+			}
+			rightSpeed = -rightSpeed;
+		}
+		*/
 		left.setSpeed(leftSpeed);
 		right.setSpeed(rightSpeed);
 		left.endSynchronization();
