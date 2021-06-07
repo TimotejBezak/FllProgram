@@ -26,7 +26,8 @@ public class DruhyVyjazd extends Vyjazd {
 		//robot.PIDpoCiaru(300, 0.2, robot.lavyFarebnik);
 		//robot.otocitPoCiaru(100, -100, robot.lavyFarebnik);
 		
-		robot.dopreduZarovnatNaCiaru(698,-1);
+		robot.PIDpoCiaru(230, -0.10, robot.lavyFarebnik, false);
+		robot.dopreduZarovnatNaCiaru(-1,2300);
 		
 		//robot.dozadu(0.5, 600);
 		

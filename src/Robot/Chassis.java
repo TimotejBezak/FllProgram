@@ -60,6 +60,13 @@ public class Chassis {
 		left.endSynchronization();
 	}
 	
+	public void initSynchronizedMovementBezSynchronizovania(float speed, int acc){
+		left.setAcceleration(acc);
+		right.setAcceleration(acc);
+		left.setSpeed(speed);
+		right.setSpeed(speed);
+	}
+	
 	public int otocenieMotorov() {
 		return (left.getTachoCount()+right.getTachoCount())/2;
 	}
@@ -76,7 +83,7 @@ public class Chassis {
 		left.startSynchronization();
 		left.rotate(angle, true);
 		right.rotate(angle, true);
-		left.startSynchronization();
+		left.startSynchronization(); // nema tu byt endSynchronization ???
 	}
 	
 	public void beginBackwardMovement() {
@@ -88,6 +95,13 @@ public class Chassis {
 	
 	public void beginBackwardMovement(int angle) {
 		beginForwardMovement(-angle);
+	}
+
+	public void otocObaMotory(int angleLeft, int angleRight) {
+		// left.startSynchronization();
+		left.rotate(angleLeft, true);
+		right.rotate(angleRight, true);
+		// left.endSynchronization();
 	}
 	
 	public void stopMovement() {
@@ -121,37 +135,43 @@ public class Chassis {
 		left.endSynchronization();
 	}
 	
-	private boolean lastLeftForward = false, lastRightForward = false;
-	public void adjustSpeed(float leftSpeed, float rightSpeed) {
-		left.startSynchronization();
-		/*
+	private int lastLeftForward = 0, lastRightForward = 0;
+	public void adjustSpeedCiara(float leftSpeed, float rightSpeed) {
+		//left.startSynchronization();
 		if (leftSpeed >= 0) {
-			if(!lastLeftForward) {
-				left.backward();
-				lastLeftForward = true;
+			if(lastLeftForward <= 0) {
+				left.forward();
+				lastLeftForward = 1;
 			}
 		} else {
-			if(lastLeftForward) {
-				left.forward();
-				lastLeftForward = false;
+			if(lastLeftForward >= 0) {
+				left.backward();
+				lastLeftForward = -1;
 			}
 			leftSpeed = -leftSpeed;
 		}
 		if (rightSpeed >= 0) {
-			if(!lastRightForward) {
-				right.backward();
-				lastRightForward = true;
+			if(lastRightForward <= 0) {
+				right.forward();
+				lastRightForward = 1;
 			}
 		} else {
-			if(lastRightForward) {
-				right.forward();
-				lastRightForward = false;
+			if(lastRightForward >= 0) {
+				right.backward();
+				lastRightForward = -1;
 			}
 			rightSpeed = -rightSpeed;
 		}
-		*/
+		left.setSpeed(leftSpeed);
+		right.setSpeed(rightSpeed);
+		//left.endSynchronization();
+	}
+	
+	public void adjustSpeed(float leftSpeed, float rightSpeed) {
+		left.startSynchronization();
 		left.setSpeed(leftSpeed);
 		right.setSpeed(rightSpeed);
 		left.endSynchronization();
 	}
+	
 }

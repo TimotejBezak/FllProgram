@@ -209,7 +209,7 @@ public class Robot {
 		gyroSensor.nastavMod(1);
 	}
 	
-	public void PIDpoCiaru(float rychlost, double vzd, Farebnik farebnik) throws InterruptedException {
+	public void PIDpoCiaru(float rychlost, double vzd, Farebnik farebnik, boolean cierna) throws InterruptedException {
 		int zrychlenieTeraz = zrychlenie;
 		PIDController lavypid,pravypid;
 		if(vzd > 0) {
@@ -220,7 +220,7 @@ public class Robot {
 			lavypid = PIDdozaduLavy;
 			pravypid = PIDdozaduPravy;
 		}
-		PIDPoCiaru pid = new PIDPoCiaru(chassis,rychlost,farebnik,pravypid,lavypid);
+		PIDPoCiaru pid = new PIDPoCiaru(chassis,rychlost,farebnik,pravypid,lavypid,cierna);
 		pid.execute(zrychlenieTeraz, chassis.lengthToAngle(vzd),default_spomalenie);
 	}
 	
@@ -229,24 +229,41 @@ public class Robot {
 		otocit.execute(0,0);
 	}
 	
-	public void dopreduZarovnatNaCiaru(float vzd, int strana) throws InterruptedException {
-		//this.PIDpoCiaru(300, vzd, this.lavyFarebnik);																																		
-		float stred = 0.5f;
-		float bocivost = 40*strana;
-		chassis.initSynchronizedMovement(10, 200);
-		chassis.beginForwardMovement();
+	public void dopreduZarovnatNaCiaru(int strana, int casKonca) throws InterruptedException {
+		//this.PIDpoCiaru(300, vzd, this.lavyFarebnik);
+		PIDController pidP = new PIDController(10,0,3);
+		PIDController pidL = new PIDController(10,0,3);
+		float stred = 0.45f;
+		//float bocivost = 10*strana;//40*
+		int limit = 2;
+		chassis.initSynchronizedMovementBezSynchronizovania(10, 1000000);
+		// chassis.beginForwardMovement();
+		chassis.adjustSpeedCiara(70, 70);
 		long cas = System.currentTimeMillis();
 		while(Main.beziVyjazd()) {
 			long bezi = System.currentTimeMillis() - cas;
-			if (bezi > 5000) {
+			if (bezi > casKonca) {
 				break;
 			}
+			
 			float hodnotaP = this.pravyFarebnik.getValue();
 			float hodnotaL = this.lavyFarebnik.getValue();
 			float leftSpeed, rightSpeed;
-			rightSpeed = bocivost*(stred-hodnotaP);
-			leftSpeed = bocivost*(stred-hodnotaL);
-			chassis.adjustSpeed(leftSpeed, rightSpeed);
+			double vysledokPiduPravy = pidP.getOutput(stred-hodnotaP);
+			double vysledokPiduLavy = pidL.getOutput(stred-hodnotaL);
+			
+			
+			rightSpeed = (float)vysledokPiduPravy*strana;//bocivost*(stred-hodnotaP);
+			leftSpeed = (float)vysledokPiduLavy*strana;//bocivost*(stred-hodnotaL);
+			// chassis.adjustSpeedCiara(leftSpeed, rightSpeed);
+			int pravy = Math.max(-limit, Math.min(limit, (int)rightSpeed));
+			int lavy = Math.max(-limit, Math.min(limit, (int)leftSpeed));
+			if(lavy == 0 && pravy == 0) break;
+			chassis.otocObaMotory(
+				lavy,
+				pravy
+			);
+			System.out.println(""+bezi+", "+hodnotaL+", "+leftSpeed+"     "+hodnotaP+", "+rightSpeed);
 		}
 		chassis.stopMovement();
 		if(!Main.beziVyjazd()) {
