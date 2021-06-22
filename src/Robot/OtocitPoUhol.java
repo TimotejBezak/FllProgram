@@ -14,7 +14,7 @@ public class OtocitPoUhol extends OtacavyPohyb {
 	
 	float p = 4.0f;
 	float minimalnaRychlost = 0.4f;//0.2
-	float minimalnaRychlostSpomalenie = 0.25f;
+	float minimalnaRychlostSpomalenie = 0.25f;//0.25
 	
 	
 	float rychlostpodlauhlu(float x) {

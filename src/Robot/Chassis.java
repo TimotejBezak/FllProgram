@@ -83,7 +83,7 @@ public class Chassis {
 		left.startSynchronization();
 		left.rotate(angle, true);
 		right.rotate(angle, true);
-		left.startSynchronization(); // nema tu byt endSynchronization ???
+		left.endSynchronization(); // nema tu byt endSynchronization ???
 	}
 	
 	public void beginBackwardMovement() {

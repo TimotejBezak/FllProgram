@@ -43,6 +43,15 @@ public class Robot {
 		maxSpeed = chassis.getMaxSpeed();
 	}
 	
+	public void otocLavy(int stupne, int speed) {
+		chassis.left.setSpeed(speed);
+		chassis.left.rotate(stupne);
+	}
+	
+	public void otocPravy(int stupne, int speed) {
+		
+	}
+	
 	public void OtocPredny(int stupne, boolean cakaj) {
 		OtocPredny(stupne, (int)predny.getMaxSpeed(), cakaj);
 	}
@@ -263,7 +272,7 @@ public class Robot {
 				lavy,
 				pravy
 			);
-			System.out.println(""+bezi+", "+hodnotaL+", "+leftSpeed+"     "+hodnotaP+", "+rightSpeed);
+//			System.out.println(""+bezi+", "+hodnotaL+", "+leftSpeed+"     "+hodnotaP+", "+rightSpeed);
 		}
 		chassis.stopMovement();
 		if(!Main.beziVyjazd()) {

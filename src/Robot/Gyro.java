@@ -35,7 +35,7 @@ public class Gyro implements Sensor {
 	
 	public void nastavMod(int mod) {
 		this.mod = mod;
-		System.out.println("Nastavujem mod na: "+ mod);
+//		System.out.println("Nastavujem mod na: "+ mod);
 	}
 	
 	public float getValue() {
