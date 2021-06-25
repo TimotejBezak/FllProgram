@@ -26,8 +26,8 @@ public class stvrtyVyjazd extends Vyjazd {
 		//robot.dopredu(2.00);
 		
 		robot.dopredu(0.485,700);
-		robot.dozadu(0.37,700);//0.29
-		robot.otocitPoUhol(400,-400,-90);
+		robot.dozadu(0.22,800);//0.37.700
+		//robot.otocitPoUhol(400,-400,-90);
 		
 		
 		//robot.PIDdopredu2(1.9, 800);

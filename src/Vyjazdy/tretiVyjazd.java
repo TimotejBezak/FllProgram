@@ -26,13 +26,14 @@ public class tretiVyjazd extends Vyjazd {
 	protected void Spusti() throws InterruptedException {		
 		robot.otocitPoUhol(100, 0, -3);//robot.dopredu(1.44,700);//idenie popri stene
 		
-		robot.dopredubezgyra(1.4305, 700);//robot.dopreduBezGyra2(1.430, 700, 1000, 870);//robot.dopredubezgyra(1.438, 700);//1.443
+		robot.dopredubezgyra(1.45, 700);// 1.4305//robot.dopreduBezGyra2(1.430, 700, 1000, 870);//robot.dopredubezgyra(1.438, 700);//1.443     1.43
 		float uhol1 = 87;//87
 		robot.otocitPoUhol(100, 500, uhol1);//100,500
 		robot.dopredu(0.20,600,uhol1);//robot.dopredu(0.3075 + 0.10,600,uhol1);//0.2825
 		//robot.dopredu(0.2825,600,uhol1);//robot.dopredu(0.3075 + 0.10,600,uhol1);//0.2825
-		robot.PIDpoCiaru(60, 0.08, robot.lavyFarebnik, false);
+		robot.PIDpoCiaru(60, 0.1, robot.lavyFarebnik, false);    //0.08
 		robot.dopreduZarovnatNaCiaru(1,2300);
+		robot.dozadu(0.025, 600);
 //		TimeUnit.SECONDS.sleep(1);
 //		robot.otocLavy(-30, 100);//robot.otocitPoUhol(100, -100, 85);
 //		robot.otocLavy(30, 100);//robot.otocitPoUhol(-100, 0, uhol1);
@@ -45,9 +46,9 @@ public class tretiVyjazd extends Vyjazd {
 //		robot.dozadu(0.025,100,uhol1);
 //		
 		robot.OtocZadny(4*360+240, false);//davanie radlice trosku dole
-		float uhol2 = 178;
+		float uhol2 = 176; //178
 		robot.otocitPoUhol(-600, -79, uhol2);//-1100,-120        -84   strasidelna otocka
-		robot.dopredu(0.25,400,uhol2);//prichadzanie k pneumatikam 0.27
+		robot.dopredu(0.25,400,uhol2);//prichadzanie k pneumatikam 0.27   0.25
 		
 		
 		
@@ -66,7 +67,7 @@ public class tretiVyjazd extends Vyjazd {
 		
 		robot.otocitPoUhol(200, -400, 90);
 		robot.dozadu(0.55,600);
-		robot.dopredu(0.26,600);
+		robot.dopredu(0.27,600);     //0.26     0.265
 		robot.otocitPoUhol(-200, 100, uhol2-5);
 		robot.OtocZadny(15*360,false);//tocenie kolesom -10
 		robot.dozadu(0.35,600);
@@ -100,14 +101,15 @@ public class tretiVyjazd extends Vyjazd {
 		float uhol4 = 180+40-10;
 		//TimeUnit.SECONDS.sleep(10);
 		robot.otocitPoUhol(200, 800, uhol4);													// adam > timo
-		//TimeUnit.SECONDS.sleep(10);
-		robot.dopredu(0.10,270,uhol4);// idenie k jednotke zdravia
+		//TimeUnit.SECONDS.sleep(10);                                                           // peto > adam   
+		robot.dopredu(0.10,270,uhol4);// idenie k jednotke zdravia                              // teda peto je najlepsi. 
 		
+		float uhol5 = 177;
 		//TimeUnit.SECONDS.sleep(10);
-		robot.otocitPoUhol(-80, -500, uhol2);// zobratie jednotky zdravia   -80,-500
+		robot.otocitPoUhol(-80, -500, uhol5);// zobratie jednotky zdravia   -80,-500
 		
-		robot.otocitPoUhol(0, 150, uhol2+5);//vratenie do basu
-		robot.dopredubezgyra(1.7, 700, 0.86f);//1.5
+		robot.otocitPoUhol(0, 150, uhol5+5);//vratenie do basu
+		robot.dopredubezgyra(1.7, 500, 0.86f);//1.5    700
 		
 		//robot.dopredu(1.80,600);
 		
