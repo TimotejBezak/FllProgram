@@ -23,7 +23,7 @@ public class stvrtyVyjazd extends Vyjazd {
 	protected void Spusti() throws InterruptedException {
 		// TODO Auto-generated method stub
 		
-		//robot.dopredu(2.00);
+		//robot.dopredu(2.00);													// adam je najlepsi
 		
 		robot.dopredu(0.485,700);
 		robot.dozadu(0.22,800);//0.37.700
